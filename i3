@@ -1,0 +1,1 @@
+/home/eric/.config/i3
