@@ -120,11 +120,6 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
-exec --no-startup-id i3-msg 'workspace $ws2; exec /usr/bin/emacs ~/go/src/github.com/metacurrency/holochain'
-exec --no-startup-id i3-msg 'workspace $ws8; exec /usr/bin/emacs ~/.config/i3/config'
-exec --no-startup-id i3-msg 'workspace $ws3; exec /usr/bin/google-chrome --restore-last-session'
-
-
 assign [class="Slack"] $ws9
 assign [class="Skype"] $ws9
 assign [class="Rhythmbox"] $ws10
@@ -139,10 +134,11 @@ workspace $ws4 output LVDS1
 workspace $ws5 output LVDS1
 workspace $ws6 output LVDS1
 workspace $ws7 output LVDS1
-workspace $ws8 output LVDS1
+workspace $ws8 output HDMI1
 workspace $ws9 output LVDS1
 workspace $ws10 output LVDS1
 
+# command to move a workspace to the other screen
 bindsym $mod+m move workspace to output left
 
 # reload the configuration file
@@ -237,7 +233,7 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 #floating
-#for_window [class="Skype"] floating enable
+for_window [class="Skype"] floating enable
 for_window [class="Pavucontrol"] floating enable
 #file manager windows 
 for_window [title="Copying"]               floating enable
@@ -249,7 +245,7 @@ bindsym $mod+n exec nautilus --no-desktop
 bindsym $mod+k exec kupfer
 
 
-# startup stuff
+# startup programs and deamons
 
 # pulse audio applet
 exec pa-applet &
@@ -258,12 +254,20 @@ exec nm-applet &
 # bluetooth applet
 exec blueman-applet &
 
+exec gnome-settings-daemon &
+
 exec --no-startup-id spotify
 exec --no-startup-id rhythmbox
 exec --no-startup-id slack
-exec --no-startup-id skype
+#exec --no-startup-id skype
 exec_allways --no-startup-id  feh   --bg-scale /home/eric/Pictures/sunburst.jpg
 
-exec gnome-settings-daemon &
+set $currentProjectDir ~/go/src/github.com/metacurrency/holochain
 
-#UI 
+exec --no-startup-id i3-msg 'workspace $ws1; exec /usr/bin/gnome-terminal --working-directory $currentProjectDir'
+exec --no-startup-id i3-msg 'workspace $ws2; exec /usr/bin/emacs $currentProjectDir'
+
+exec --no-startup-id i3-msg 'workspace $ws8; exec /usr/bin/emacs ~/.config/i3/config'
+exec --no-startup-id i3-msg 'workspace $ws3; exec /usr/bin/google-chrome --restore-last-session'
+
+
