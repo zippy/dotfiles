@@ -42,6 +42,13 @@ bindsym $mod+Shift+q kill
 #bindsym $mod+l focus up
 #bindsym $mod+semicolon focus right
 
+bindsym $mod+b border toggle
+
+# scratchpad
+bindsym $mod+p move scratchpad
+bindsym $mod+o scratchpad show
+
+
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -231,6 +238,11 @@ bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioPause exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
+
+bindsym XF86Calculator exec gnome-calculator
+
+bindsym Pause exec systemctl suspend
+
 
 #floating
 for_window [class="Skype"] floating enable
