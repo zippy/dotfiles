@@ -251,6 +251,9 @@ for_window [class="Pavucontrol"] floating enable
 for_window [title="Copying"]               floating enable
 for_window [title="Moving"]                floating enable
 
+for_window [title="Hangouts"] move container to workspace $ws9
+for_window [title="Google Hangouts is sharing a window with hangouts.google.com."] floating enabled
+
 # app shortcuts
 bindsym $mod+c exec google-chrome
 bindsym $mod+n exec nautilus --no-desktop
@@ -282,4 +285,5 @@ exec --no-startup-id i3-msg 'workspace $ws2; exec /usr/bin/emacs $currentProject
 exec --no-startup-id i3-msg 'workspace $ws8; exec /usr/bin/emacs ~/.config/i3/config'
 exec --no-startup-id i3-msg 'workspace $ws3; exec /usr/bin/google-chrome --restore-last-session'
 
-
+exec synclient TapButton1=0
+exec synclient TapButton2=0
