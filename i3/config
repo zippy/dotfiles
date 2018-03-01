@@ -75,6 +75,7 @@ bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
+bindsym $mod+u fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -134,19 +135,22 @@ for_window [class="Spotify"] move to workspace $ws10 #spotify app broken only wo
 
 
 # workspace default monitors
-workspace $ws1 output LVDS1
-workspace $ws2 output HDMI1
-workspace $ws3 output HDMI1
-workspace $ws4 output LVDS1
-workspace $ws5 output LVDS1
-workspace $ws6 output LVDS1
-workspace $ws7 output LVDS1
-workspace $ws8 output HDMI1
-workspace $ws9 output LVDS1
-workspace $ws10 output LVDS1
+workspace $ws1 output eDP-1
+workspace $ws2 output DP-1-1
+workspace $ws3 output DP-1-1
+workspace $ws4 output eDP-1
+workspace $ws5 output eDP-1
+workspace $ws6 output eDP-1
+workspace $ws7 output eDP-1
+workspace $ws8 output DP-1-1
+workspace $ws9 output eDP-1
+workspace $ws10 output eDP-1
 
 # command to move a workspace to the other screen
 bindsym $mod+m move workspace to output left
+
+#reload monitors
+bindsym $mod+Shift+m exec "xrandr | grep 'HDMI-2 connected' && xrandr --output eDP-1 --auto --output HDMI-2 --auto --right-of eDP-1"
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -243,6 +247,9 @@ bindsym XF86Calculator exec gnome-calculator
 
 bindsym Pause exec systemctl suspend
 
+#screen capture
+bindsym Print  exec scrot -s -e 'mv $f ~/Pictures/'
+
 
 #floating
 for_window [class="Skype"] floating enable
@@ -279,10 +286,12 @@ exec_allways --no-startup-id  feh   --bg-scale /home/eric/Pictures/sunburst.jpg
 
 set $currentProjectDir ~/go/src/github.com/metacurrency/holochain
 
-exec --no-startup-id i3-msg 'workspace $ws1; exec /usr/bin/gnome-terminal --working-directory $currentProjectDir'
-exec --no-startup-id i3-msg 'workspace $ws2; exec /usr/bin/emacs $currentProjectDir'
+#bindsym $mod+z workspace $ws2; exec /usr/bin/emacs $currentProjectDir
+bindsym $mod+z workspace $ws2; exec /usr/bin/emacs ~/.config/i3/config
 
-exec --no-startup-id i3-msg 'workspace $ws8; exec /usr/bin/emacs ~/.config/i3/config'
+exec --no-startup-id i3-msg 'workspace $ws1; exec /usr/bin/gnome-terminal --working-directory $currentProjectDir'
+#exec --no-startup-id i3-msg 'workspace $ws2; exec /usr/bin/emacs $currentProjectDir'
+#exec --no-startup-id i3-msg 'workspace $ws8; exec /usr/bin/emacs ~/.config/i3/config'
 exec --no-startup-id i3-msg 'workspace $ws3; exec /usr/bin/google-chrome --restore-last-session'
 
 exec synclient TapButton1=0
